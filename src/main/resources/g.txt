@@ -1,0 +1,65 @@
+Hibernate: 
+    create table EMPLOYEE (
+        EMP_ID bigint not null auto_increment,
+        EMP_NAME varchar(255),
+        EMP_ROLE varchar(255),
+        primary key (EMP_ID)
+    ) engine=InnoDB
+
+################################
+	
+Hibernate: 
+    create table EMPLOYEE (
+        EMP_ID bigint not null auto_increment,
+        EMP_NAME varchar(255),
+        EMP_ROLE varchar(255),
+        org_ORG_ID bigint,
+        primary key (EMP_ID)
+    ) engine=InnoDB
+Hibernate: 
+    create table ORGANIZATION (
+        ORG_ID bigint not null auto_increment,
+        ORG_LOC varchar(255),
+        ORG_NAME varchar(255),
+        primary key (ORG_ID)
+    ) engine=InnoDB
+Hibernate: 
+    alter table EMPLOYEE 
+       drop index UK_c064sos7w07nkehd88fgqipkj
+Hibernate: 
+    alter table EMPLOYEE 
+       add constraint UK_c064sos7w07nkehd88fgqipkj unique (org_ORG_ID)
+Hibernate: 
+    alter table EMPLOYEE 
+       add constraint FK5p9nicp4uwx3bjf5mnxtojui4 
+       foreign key (org_ORG_ID) 
+       references ORGANIZATION (ORG_ID)
+
+#######################################################
+
+Hibernate: 
+    create table EMPLOYEE (
+        EMP_ID bigint not null auto_increment,
+        EMP_NAME varchar(255),
+        EMP_ROLE varchar(255),
+        primary key (EMP_ID)
+    ) engine=InnoDB
+Hibernate: 
+    create table ORGANIZATION (
+        ORG_ID bigint not null auto_increment,
+        ORG_LOC varchar(255),
+        ORG_NAME varchar(255),
+        emp_EMP_ID bigint,
+        primary key (ORG_ID)
+    ) engine=InnoDB
+Hibernate: 
+    alter table ORGANIZATION 
+       drop index UK_9gstkqakhpn3qqc3dt1ympes4
+Hibernate: 
+    alter table ORGANIZATION 
+       add constraint UK_9gstkqakhpn3qqc3dt1ympes4 unique (emp_EMP_ID)
+Hibernate: 
+    alter table ORGANIZATION 
+       add constraint FK83y1mrv2phfypqg1rdtnquc4u 
+       foreign key (emp_EMP_ID) 
+       references EMPLOYEE (EMP_ID)
